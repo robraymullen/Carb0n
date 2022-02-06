@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+
 import com.carb0n.landscape.message.model.SensorMessage;
 import com.carb0n.landscape.message.model.SensorMessage.Status;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class MessageProcessPipeline {
 	
@@ -15,15 +19,22 @@ public class MessageProcessPipeline {
 	Map<String, SensorMessage> errorMessages = new HashMap<>();
 	Map<String, SensorMessage> successMessages = new HashMap<>();
 	
-	public MessageProcessPipeline() {
-		pipeline.add(new ErrorCheckProcessor());
-		pipeline.add(new SuccessProcessor());
+	private SimpMessagingTemplate template;
+	
+	public MessageProcessPipeline(SimpMessagingTemplate template) {
+		this.template = template;
+		pipeline.add(new ErrorCheckProcessor(template));
+		pipeline.add(new SuccessProcessor(template));
 	}
 	
 	public void run(SensorMessage message) {
 		while (message.getStatus() != Status.ERROR && message.getStatus() != Status.PROCESSED) {
 			IMessageProcessor processor = pipeline.poll();
-			message = processor.process(message);
+			try {
+				message = processor.process(message);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
 			if (message.getStatus() == Status.ERROR) errorMessages.put(message.getId(), message);
 			else successMessages.put(message.getId(), message);
 			System.out.println("In pipeline: "+message);

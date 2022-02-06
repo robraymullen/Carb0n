@@ -44,19 +44,19 @@ public class DeviceLandscapeManagerApplication {
 		return BindingBuilder.bind(queue).to(exchange);
 	}
 
-	@Bean
-	public CorsFilter corsFilter() {
-	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        List<String> allowed = new ArrayList<>();
-        allowed.add("*");
-        config.setAllowedOriginPatterns(allowed);
-        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "responseType", "Authorization"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-	}
+//	@Bean
+//	public CorsFilter corsFilter() {
+//	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//	    final CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        List<String> allowed = new ArrayList<>();
+//        allowed.add("*");
+//        config.setAllowedOriginPatterns(allowed);
+//        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "responseType", "Authorization"));
+//        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//	}
 	
 	@Bean
 	SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
