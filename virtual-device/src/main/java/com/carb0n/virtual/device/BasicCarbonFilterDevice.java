@@ -22,4 +22,9 @@ public class BasicCarbonFilterDevice extends AbstractDevice {
 		return random;
 	}
 
+	@Override
+	public void setId(String id) {
+		this.id = id;
+	}
+
 }

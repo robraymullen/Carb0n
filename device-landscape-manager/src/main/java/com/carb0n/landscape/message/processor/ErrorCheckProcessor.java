@@ -23,9 +23,9 @@ public class ErrorCheckProcessor implements IMessageProcessor {
 	public SensorMessage process(SensorMessage message) throws JsonProcessingException {
 		if (message.getPostFilter() < 0 || message.getPreFilter() < 0) {
 			message.setStatus(Status.ERROR);
+			ObjectMapper objectMapper = new ObjectMapper();
+			this.template.convertAndSend("/topic/error", objectMapper.writeValueAsString(message));
 		}
-		ObjectMapper objectMapper = new ObjectMapper();
-		this.template.convertAndSend("/topic/error", objectMapper.writeValueAsString(message));
 		return message;
 	}
 
