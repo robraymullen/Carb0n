@@ -7,7 +7,7 @@ import com.carb0n.virtual.device.DevicePool;
 
 public class VirtualDeviceManager {
 
-	public static void main(String[] args) throws IOException, TimeoutException {
+	public static void main(String[] args) throws Exception {
 		DevicePool pool = new DevicePool();
 		pool.startEmulation();
 	}

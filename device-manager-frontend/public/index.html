@@ -30,31 +30,21 @@
   </head>
   <body>
     <script>
-      var socket = new SockJS('http://localhost:7070/sensor-data');
-          stompClient = Stomp.over(socket);
-          stompClient.connect({}, function (frame) {
-              console.log('Connected: ' + frame);
-              stompClient.subscribe('/topic/error', function (message) {
-                  let json = JSON.parse(message.body);
-                  let status = json.status == "ERROR" ? "error" : "success";
-                  var row = document.getElementById(status);
-                  var x = row.insertCell(-1);
-                  x.innerHTML = `<td>${json.id}</td>`;
-                  console.log();
-              });
-            });
+      // var socket = new SockJS('http://localhost:7070/sensor-data');
+      //     stompClient = Stomp.over(socket);
+      //     stompClient.connect({}, function (frame) {
+      //         console.log('Connected: ' + frame);
+      //         stompClient.subscribe('/topic/error', function (message) {
+      //             let json = JSON.parse(message.body);
+      //             let status = json.status == "ERROR" ? "error" : "success";
+      //             var row = document.getElementById(status);
+      //             var x = row.insertCell(-1);
+      //             x.innerHTML = `<td>${json.id}</td>`;
+      //             console.log();
+      //         });
+      //       });
 
       </script>
-     <table>
-      <tr>
-        <th>Success</th>
-        <th>Error</th>
-      </tr>
-      <tr id="success">
-      </tr>
-      <tr id="error">
-      </tr>
-    </table> 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
