@@ -3,15 +3,24 @@ package com.carb0n.virtual.device;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BasicCarbonFilterDevice extends AbstractDevice {
+	
+	private double preFilter = getRandom();
 
 	@Override
 	public double getPreFilterCarbon() {
-		return getRandom();
+		this.preFilter = getRandom();
+		return this.preFilter;
 	}
 
 	@Override
 	public double getPostFilterCarbon() {
-		return getRandom();
+		double postFilter;
+		if (this.preFilter < 0) {
+			postFilter = -1;
+		} else {
+			postFilter = this.preFilter - ThreadLocalRandom.current().nextDouble(0, this.preFilter);
+		}
+		return postFilter;
 	}
 	
 	private double getRandom() {
