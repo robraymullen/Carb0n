@@ -1,4 +1,4 @@
-package com.carb0n.analysis.carb0nanalysis;
+package com.carb0nAnalysis;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
