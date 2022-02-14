@@ -20,6 +20,9 @@ public class SensorMessage {
 	
 	@JsonProperty("postFilter")
 	private double postFilter;
+	
+	@JsonProperty("date")
+	private long date;
 
 	public String getId() {
 		return id;
@@ -53,9 +56,17 @@ public class SensorMessage {
 		this.status = status;
 	}
 	
+	public long getDate() {
+		return date;
+	}
+
+	public void setDate(long date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
 		return "SensorMessage [status=" + status + ", id=" + id + ", preFilter=" + preFilter + ", postFilter="
-				+ postFilter + "]";
+				+ postFilter + ", date=" + date + "]";
 	}
 }
