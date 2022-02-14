@@ -12,6 +12,8 @@ public class SensorData {
 	private double preFilter;
 	
 	private double postFilter;
+	
+	private long date;
 
 	public String getId() {
 		return id;
@@ -35,6 +37,14 @@ public class SensorData {
 
 	public void setPostFilter(double postFilter) {
 		this.postFilter = postFilter;
+	}
+
+	public long getDate() {
+		return date;
+	}
+
+	public void setDate(long date) {
+		this.date = date;
 	}
 
 }

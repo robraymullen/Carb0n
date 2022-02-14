@@ -1,5 +1,8 @@
 package com.carb0n.virtual.device;
 
+import java.sql.Date;
+import java.time.Instant;
+
 import org.json.JSONObject;
 
 import com.rabbitmq.client.Channel;
@@ -20,6 +23,7 @@ public abstract class AbstractDevice implements IDevice {
 		        channel.exchangeDeclare(EXCHANGE_NAME, "fanout", true);
 
 		        JSONObject json = new JSONObject();
+		        json.put("date", Instant.now().toEpochMilli());
 		        json.put("preFilter", this.getPreFilterCarbon());
 		        json.put("postFilter", this.getPostFilterCarbon());
 		        json.put("id", this.id);
